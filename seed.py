@@ -43,15 +43,27 @@ def load_movies():
 
     for row in open("seed_data/u.item"):
         row = row.rstrip()
-        movie_id, title, released_at, imdb_url = row.split("|")[0:4]
+        movie_id, title, released_at, space, imdb_url = row.split("|")[0:5]
+        title = str(title.split(" ")[0:-1])
 
-        movie = Movie(movie_id=movie_id)
+
+
+
+    #     print(movie_id)   
+    #    print(title) 
+    #     print(released_at) 
+    #     print(imdb_url)  
+
+        movie = Movie(movie_id=movie_id,
+                    title=title,
+                    released_at=released_at,
+                    imdb_url=imdb_url)
+
+        # print(movie)
 
         db.session.add(movie)
 
     db.session.commit()      
-
-
 
 
 def load_ratings():

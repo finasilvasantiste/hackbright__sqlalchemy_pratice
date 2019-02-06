@@ -37,9 +37,14 @@ class Movie(db.Model):
     __tablename__ = 'movies'
 
     movie_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    title = db.Column(db.String(50), nullable = True)
+    title = db.Column(db.String(200), nullable = True)
     released_at = db.Column(db.DateTime, nullable = True)
-    imdb_url = db.Column(db.String(50), nullable = True)
+    imdb_url = db.Column(db.String(200), nullable = True)
+
+    def __repr__(self):
+
+        return "<Movie movie_id={} title={} released_at={} imdb_url={}".format(
+            self.movie_id, self.title, self.released_at, self.imdb_url)
 
 
 class Rating(db.Model):
