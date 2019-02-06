@@ -4,7 +4,7 @@ from sqlalchemy import func
 from model import User
 from model import Rating
 from model import Movie
-
+import datetime
 from model import connect_to_db, db
 from server import app
 
@@ -43,23 +43,20 @@ def load_movies():
 
     for row in open("seed_data/u.item"):
         row = row.rstrip()
-        movie_id, title, released_at, space, imdb_url = row.split("|")[0:5]
-        title = str(title.split(" ")[0:-1])
+        movie_id, title, released_str, space, imdb_url = row.split("|")[0:5]
+        title = (title.split(" ")[0:-1])
+        title = ' '.join(title)
 
+        if released_str:
+            released_at = datetime.datetime.strptime(released_str, "%d-%b-%Y")
+        else:
+            released_at = None
 
-
-
-    #     print(movie_id)   
-    #    print(title) 
-    #     print(released_at) 
-    #     print(imdb_url)  
 
         movie = Movie(movie_id=movie_id,
                     title=title,
                     released_at=released_at,
                     imdb_url=imdb_url)
-
-        # print(movie)
 
         db.session.add(movie)
 
@@ -68,6 +65,33 @@ def load_movies():
 
 def load_ratings():
     """Load ratings from u.data into database."""
+
+    print("Ratings")
+
+    Rating.query.delete()
+
+    for row in open("seed_data/u.data"):
+        row = row.rstrip()
+        #print(row)
+        user_id, movie_id, score, timestamp = row.split('\t')
+
+        user_id = int(user_id)
+        movie_id = int(user_id)
+        score = int(score)
+
+        # print(rating_id)
+        # print(movie_id)
+        # print(user_id)
+        # print(score)
+
+        rating = Rating(user_id=user_id,
+                        movie_id=movie_id,
+                        score=score)
+        # print(rating)
+
+        db.session.add(rating)
+
+    db.session.commit()
 
 
 def set_val_user_id():

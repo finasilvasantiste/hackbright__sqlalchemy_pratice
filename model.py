@@ -57,6 +57,11 @@ class Rating(db.Model):
     user_id = db.Column(db.Integer, nullable = True)
     score = db.Column(db.Integer, nullable = True)
 
+    def __repr__(self):
+
+        return "<Rating rating_id={} movie_id={} user_id={} score={}".format(
+            self.rating_id, self.movie_id, self.user_id, self.score)
+
 
 ##############################################################################
 # Helper functions
