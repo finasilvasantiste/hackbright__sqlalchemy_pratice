@@ -52,7 +52,10 @@ def load_movies():
         else:
             released_at = None
 
-
+        # print("DEBUG +++++++++")
+        # print(movie_id)
+        # print(title)
+        # print("END DEBUG +++++++++")
         movie = Movie(movie_id=movie_id,
                     title=title,
                     released_at=released_at,
@@ -76,7 +79,7 @@ def load_ratings():
         user_id, movie_id, score, timestamp = row.split('\t')
 
         user_id = int(user_id)
-        movie_id = int(user_id)
+        movie_id = int(movie_id)
         score = int(score)
 
         # print(rating_id)
@@ -84,8 +87,8 @@ def load_ratings():
         # print(user_id)
         # print(score)
 
-        rating = Rating(user_id=user_id,
-                        movie_id=movie_id,
+        rating = Rating(movie_id=movie_id,
+                        user_id=user_id,
                         score=score)
         # print(rating)
 
