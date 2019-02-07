@@ -27,7 +27,17 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """Homepage."""
+    username = request.args.get("username")
+    password = request.args.get("password")
+    # print(username)
+    # print(password)
+    session['username'] = username
+    # print('Session!:', session)
+    flash("Logged in!")
     return render_template("homepage.html")
+
+    # if session["username"] = username:
+
 
 @app.route('/users')
 def user_list():
@@ -48,6 +58,13 @@ def register_process():
  # CODE GOES HERE
 
     return redirect("/")
+
+
+@app.route('/login')
+def user_login():
+
+
+    return render_template("login.html")
 
 
 
