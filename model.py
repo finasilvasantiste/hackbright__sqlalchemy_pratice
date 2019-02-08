@@ -23,13 +23,22 @@ class User(db.Model):
     age = db.Column(db.Integer, nullable=True)
     zipcode = db.Column(db.String(15), nullable=True)
 
-    def find_user_by_email(email):
-
-        user = User.query.filter(User.email == email)
+    @classmethod
+    def find_user_by_email(cls, email):
+        user = User.query.filter(User.email == email).all()
 
         return user
         # return None if no email matched
         # return email if found 
+
+    @classmethod
+    def add_new_user(cls, email, password):
+
+        new_user = User(email=email, password=password)
+
+        db.session.add(new_user)
+
+        db.session.commit()
 
     def __repr__(self):
         """Provide helpful representation when printed."""

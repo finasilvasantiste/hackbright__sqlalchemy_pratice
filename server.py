@@ -69,11 +69,12 @@ def register_process():
     email = request.form.get("email")
     password = request.form.get("password")
 
-    # print("inside post")
-    # print(email)
-    # print(password)
+    user = User.find_user_by_email(email)
 
-    
+    if user:
+        print("User not in DB")
+    else:
+        User.add_new_user(email, password)
 
     return redirect("/")
 
