@@ -9,7 +9,6 @@
   <hr>
 
 <ul>
-    <b>Flash message:</b>
     {% for message in get_flashed_messages() %}
     <li>{{ message }}</li>
     {% endfor %}
@@ -17,7 +16,20 @@
 
 
   {% block content %} put your content here {% endblock %}
-    }
+    
 
 </body>
+<!-- 
+<script type="text/javascript">
+    
+
+
+button.addEventListener('click', () => {
+    $.get("/",() =>{} )
+
+
+})
+
+
+</script> -->
 </html>

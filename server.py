@@ -34,9 +34,17 @@ def index():
     session['username'] = username
     # print('Session!:', session)
     flash("Logged in!")
-    return render_template("homepage.html")
+    
 
-    # if session["username"] = username:
+    logOutButton = request.args.get("logoutbutton")
+    print(logOutButton)
+
+    if logOutButton:
+        session.pop('username', None)
+        flash("Logged out!")
+        print(session['_flashes'].pop(0))
+
+    return render_template("homepage.html")
 
 
 @app.route('/users')
@@ -49,13 +57,23 @@ def user_list():
 @app.route('/register', methods=["GET"])
 def register_form():
  # CODE GOES HERE
-
+    
+    print("inside get")
     return render_template("register_form.html")
 
 
 @app.route('/register', methods=["POST"])
 def register_process():
- # CODE GOES HERE
+
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    # print("inside post")
+    # print(email)
+    # print(password)
+
+    
 
     return redirect("/")
 
